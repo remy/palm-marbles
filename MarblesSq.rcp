@@ -1,0 +1,160 @@
+//..................................................... Header
+// Project: MarblesSq
+//    Path: C:\PalmDev\PilotMAG\My Projects\MatchingBalls\MarblesSq.ppp
+//    Date: 29/09/2002  22:52:26
+
+#include "MarblesSq.h"
+
+//..................................................... Program
+APPLICATIONICONNAME ID IconID "Marbles\262"
+VERSION ID VersionID "@@MarB_VERSION@@"
+APPLICATION ID ApplicationID "MarB"
+
+
+BITMAP ID bmpDead "dead_block.bmp" COMPRESS
+BITMAP ID bmpMask "block_mask.bmp" COMPRESS
+BITMAP ID bmpRestart "restart.bmp" COMPRESS
+
+
+SMALLICON "MarblesSq_small.bmp"
+
+//..................................................... Fonts
+//..................................................... Strings
+//..................................................... Alerts
+ALERT ID altGameState
+    DEFAULTBUTTON 0
+    INFORMATION
+    BEGIN
+        TITLE "Marbles\262"
+        MESSAGE "^1"
+        BUTTONS "OK"
+    END
+
+ALERT ID altConfirm
+    DEFAULTBUTTON 1
+    CONFIRMATION
+    BEGIN
+        TITLE "Marbles\262"
+        MESSAGE "^1"
+        BUTTONS "Yes" "No"
+    END
+
+//ALERT ID altHighScores
+//    DEFAULTBUTTON 0
+//    INFORMATION
+//    BEGIN
+//        TITLE "High Scores - Marbles\262"
+//        MESSAGE "^1"
+//        BUTTONS "Cool!" "Clear low scores"
+//    END
+
+//..................................................... Menus
+MENU ID mnuGame
+    BEGIN
+    PULLDOWN "Game"
+        BEGIN
+        MENUITEM "Undo" ID mnuUndo "U"
+        MENUITEM SEPARATOR
+        MENUITEM "New 1 Player Game" ID mnuNew "N"
+        MENUITEM "New 2 Player Game" ID mnuNewTwoPlayer
+        MENUITEM SEPARATOR
+		MENUITEM "Replay this game" ID mnuReplayLastGame "R"
+		MENUITEM "View game seed" ID mnuViewGameSeed
+        MENUITEM "Play Existing Game" ID mnuPlayGameSeed
+        MENUITEM SEPARATOR
+        MENUITEM "Game Options" ID mnuGameOptions "O"
+		MENUITEM SEPARATOR
+        MENUITEM "Send High Score" ID mnuSendHighScores "S"
+        END
+    PULLDOWN "Score"
+        BEGIN
+		MENUITEM "Show Score" ID mnuShowScores
+        MENUITEM "High Scores" ID mnuHighScores
+        MENUITEM "Send High Score" ID mnuSendHighScores "S"
+        MENUITEM SEPARATOR
+        MENUITEM "Clear Low Scores" ID mnuClearLowScores
+        MENUITEM "Clear All Scores" ID mnuClearAllScores
+        MENUITEM SEPARATOR
+        MENUITEM "Game Breakdown" ID mnuGameBreakdown
+        END
+    PULLDOWN "Help"
+        BEGIN
+        MENUITEM "Help" ID mnuHelp "H"
+		MENUITEM "About" ID mnuAbout
+        END
+    END
+
+
+//..................................................... Forms
+FORM ID frmMain AT (0 0 160 160)
+NOFRAME
+NOSAVEBEHIND
+USABLE
+MENUID mnuGame
+BEGIN
+	GADGET ID gdtScore AT (102 8 54 13) NONUSABLE USABLE
+END
+
+FORM ID frmGameResults AT (2 2 156 156)
+NOFRAME
+MODAL
+NOSAVEBEHIND
+USABLE
+BEGIN
+    TITLE "Marbles\262"
+    BUTTON "OK" ID btnOK AT (115 140 37 12) USABLE LEFTANCHOR FRAME FONT 0
+END
+
+
+FORM ID frmGameOptions AT (2 71 156 87)
+NOFRAME
+MODAL
+NOSAVEBEHIND
+USABLE
+BEGIN
+    TITLE "Game Options"
+    BUTTON "OK" ID btnOptOk AT (115 71 37 12) USABLE LEFTANCHOR FRAME FONT 0
+    CHECKBOX "Double tap to clear block" ID chkDblTap AT (4 35 144 11) USABLE RIGHTANCHOR FONT 1 CHECKED
+    CHECKBOX "Sound" ID chkSound AT (4 20 49 11) USABLE RIGHTANCHOR FONT 1
+    CHECKBOX "Timeout score display" ID chkTimeout AT (4 50 129 11) USABLE RIGHTANCHOR FONT 1
+END
+
+
+
+//..................................................... Categories
+
+//.................................................... String Table
+STRING ID InstructionsStr "                  Marbles\262 v@@MarB_VERSION@@\n\n" \
+	"Written by Remy Sharp\n\n" \
+	"     -= Game Instructions =-\n" \
+    "Marbles\262 is a level based to gain as many points as possible and you can also play against another player on the same Palm.\n\n" \
+	"The object of the game is to collect square marble sets to gain a high score. The larger the square marble set collected, the larger the score. A square marble set is a group of identical square marbles connected to each other left-and-right, or up-and-down.\n\n" \
+    "If you have 5 or less marbles left on the board, you gain a bonus of 150 points, if you clear the board your bonus will be 300 points and you can move on to the next level.\n\n" \
+    "\225 When you think your score is extra high - submit it using the menu item 'Send Score' and I'll add your position to the leader board on my web site.\n\n" \
+	"\225 Select a set by clicking on one of the square marbles in the set, then you will be able to see how many points the set is worth. \n\n" \
+	"\225 If you wish to continue to collect the set, click on the set again; if not click on any other square marble. \n\n" \
+	"\225 The game ends automatically, when no more square marble sets are available. \n\n" \
+    "        -= 2 Player Games =-\n" \
+    "Two player games are the same as the one player game - except that the players take turns to get the best score on the same board.\n\n" \
+    "Once the two games are complete - there is a game break down to see who won, got the biggest set, and a break down of where the points came from."
+
+STRING ID strAbout "                  Marbles\262 v@@MarB_VERSION@@\n\n" \
+					"Written by Remy Sharp\n" \
+                   "palm@ihatemusic.com\n" \
+                   "www.ihatemusic.com/palm\n" \
+                   "\n" \
+                   "I hope you enjoy playing Marbles\262 - I wrote the thing because I enjoy the puzzle game so much.\n" \
+                   "\nCredit to:\n" \
+                   "Julie - for inspiring me\n" \
+                   "Andy - for testing / feedback\n" \
+                   "DG - for clever idea coming soon and c help :)\n\n" \
+                   "Visit my web page for more free Palm apps:\n" \
+                   "- Interrupt Me!\n" \
+                   "- Chess Timer\n" \
+                   "\n" \
+                   "Please please send me feedback - either suggestions for this program or any other idea you may have - you never know, I may be able to cobble something together!\n"
+
+//............................................................. Hex
+
+//............................................................ Data
+
